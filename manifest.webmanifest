@@ -1,0 +1,26 @@
+{
+  "name": "vPixelHunter",
+  "short_name": "vPixelHunter",
+  "description": "A retro-style creature-hunting adventure built for fullscreen landscape play, with offline support.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#d6e2c2",
+  "theme_color": "#6f8c52",
+  "categories": ["games", "entertainment"],
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

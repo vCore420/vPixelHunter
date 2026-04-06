@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vPixelHunter</title>
+  <meta name="theme-color" content="#6f8c52">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="standalone-app" id="standaloneApp">
+    <main class="layout-shell">
+      <aside class="shell-panel shell-panel--controls">
+        <div class="shell-panel__heading">
+          <p class="shell-panel__eyebrow">Controls</p>
+          <div class="shell-toggle-group">
+            <span class="shell-toggle__label">Touch</span>
+            <label class="shell-toggle" for="touchControlsToggle" title="Show touch controls">
+              <input id="touchControlsToggle" class="shell-toggle__input" type="checkbox">
+              <span class="shell-toggle__box" aria-hidden="true"></span>
+            </label>
+          </div>
+        </div>
+        <ul class="shell-list">
+          <li><span>Move</span><strong>Arrow Keys</strong></li>
+          <li><span>Confirm</span><strong>Enter / Space</strong></li>
+          <li><span>Party / Back</span><strong>X / Backspace</strong></li>
+        </ul>
+        <div class="shell-goals">
+          <p class="shell-picker__label">Goals</p>
+          <ul class="shell-goals__list">
+            <li id="goalParty" class="shell-goal">
+              <div class="shell-goal__copy">
+                <strong>Build a Full Party</strong>
+                <span id="goalPartyProgress">0/6</span>
+              </div>
+              <span class="shell-goal__tick" aria-hidden="true">✓</span>
+            </li>
+            <li id="goalBadges" class="shell-goal">
+              <div class="shell-goal__copy">
+                <strong>Collect All Town Badges</strong>
+                <span id="goalBadgesProgress">0/12</span>
+              </div>
+              <span class="shell-goal__tick" aria-hidden="true">✓</span>
+            </li>
+            <li id="goalDungeonLoot" class="shell-goal">
+              <div class="shell-goal__copy">
+                <strong>Obtain Dungeon Loot</strong>
+                <span id="goalDungeonLootProgress">0/1</span>
+              </div>
+              <span class="shell-goal__tick" aria-hidden="true">✓</span>
+            </li>
+            <li id="goalDex" class="shell-goal">
+              <div class="shell-goal__copy">
+                <strong>Catch Every Monster</strong>
+                <span id="goalDexProgress">0/0</span>
+              </div>
+              <span class="shell-goal__tick" aria-hidden="true">✓</span>
+            </li>
+            <li id="goalScore" class="shell-goal">
+              <div class="shell-goal__copy">
+                <strong>Reach 10,000 Score</strong>
+                <span id="goalScoreProgress">0/10000</span>
+              </div>
+              <span class="shell-goal__tick" aria-hidden="true">✓</span>
+            </li>
+            <li id="goalMythicals" class="shell-goal">
+              <div class="shell-goal__copy">
+                <strong>Catch All Mythicals</strong>
+                <span id="goalMythicalsProgress">0/4</span>
+              </div>
+              <span class="shell-goal__tick" aria-hidden="true">✓</span>
+            </li>
+          </ul>
+        </div>
+        <div class="shell-picker">
+          <label class="shell-picker__label" for="playerSpriteSelect">Player Sprite</label>
+          <select id="playerSpriteSelect" class="shell-picker__select"></select>
+        </div>
+      </aside>
+
+      <section class="stage-card">
+        <div id="standaloneView" class="stage-view"></div>
+        <div id="touchControlsPanel" class="touch-controls" data-visible="false" aria-hidden="true">
+          <div class="touch-controls__pad" aria-label="Touch movement controls">
+            <button class="touch-controls__button touch-controls__button--up" type="button" data-touch-control="ArrowUp" aria-label="Move up">
+              <span aria-hidden="true">▲</span>
+            </button>
+            <button class="touch-controls__button touch-controls__button--left" type="button" data-touch-control="ArrowLeft" aria-label="Move left">
+              <span aria-hidden="true">◀</span>
+            </button>
+            <button class="touch-controls__button touch-controls__button--right" type="button" data-touch-control="ArrowRight" aria-label="Move right">
+              <span aria-hidden="true">▶</span>
+            </button>
+            <button class="touch-controls__button touch-controls__button--down" type="button" data-touch-control="ArrowDown" aria-label="Move down">
+              <span aria-hidden="true">▼</span>
+            </button>
+            <div class="touch-controls__core" aria-hidden="true"></div>
+          </div>
+          <div class="touch-controls__actions" aria-label="Touch action controls">
+            <button class="touch-controls__button touch-controls__button--confirm" type="button" data-touch-control="confirm">A</button>
+            <button class="touch-controls__button touch-controls__button--back" type="button" data-touch-control="back">B</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="shell-panel shell-panel--stats">
+        <div class="shell-panel__heading">
+          <p class="shell-panel__eyebrow">Player</p>
+          <div class="shell-toggle-group">
+            <span class="shell-toggle__label">Full</span>
+            <label class="shell-toggle" for="fullscreenToggle" title="Toggle full screen">
+              <input id="fullscreenToggle" class="shell-toggle__input" type="checkbox">
+              <span class="shell-toggle__box" aria-hidden="true"></span>
+            </label>
+          </div>
+        </div>
+        <div class="shell-stats">
+          <div class="shell-stat"><span>Lead</span><strong id="mtLead">Ember Pup Lv1</strong></div>
+          <div class="shell-stat"><span>Vital</span><strong id="mtPartyHp">HP 12/12</strong></div>
+          <div class="shell-stat"><span>Party</span><strong id="mtCaught">Caught 0 Party 0</strong></div>
+          <div class="shell-stat"><span>Badges</span><strong id="mtBadges">0/12</strong></div>
+          <div class="shell-stat"><span>Capsules</span><strong id="mtCapsules">5</strong></div>
+          <div class="shell-stat"><span>Tonics</span><strong id="mtTonics">0/20</strong></div>
+          <div class="shell-stat"><span>Rods</span><strong id="mtRods">0/20</strong></div>
+          <div class="shell-stat"><span>Coins</span><strong id="mtCoins">20</strong></div>
+          <div class="shell-stat"><span>Charms</span><strong id="mtCharm">0</strong></div>
+          <div class="shell-stat"><span>Score</span><strong id="mtScore">0</strong></div>
+          <div class="shell-stat shell-stat--score">
+            <span>High</span>
+            <div class="shell-stat__value-row">
+              <strong id="mtHigh">0</strong>
+              <button id="clearHighScoreBtn" class="shell-icon-btn" type="button" aria-label="Reset high score" title="Reset high score">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M9 3h6l1 2h4v2H4V5h4l1-2Zm1 6h2v8h-2V9Zm4 0h2v8h-2V9ZM7 9h2v8H7V9Zm1 12a2 2 0 0 1-2-2V8h12v11a2 2 0 0 1-2 2H8Z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button id="restartGameBtn" class="shell-btn shell-btn--danger shell-panel__action" type="button">Restart Game</button>
+      </aside>
+    </main>
+  </div>
+
+  <script type="module" src="./app-shell.js"></script>
+</body>
+</html>
